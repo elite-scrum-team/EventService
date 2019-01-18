@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-    const r = await EventController.retriveOne(req.params.id);
+    const r = await EventController.retrieveOne(req.params.id);
     if (r) {
         await res.json(r);
     } else {

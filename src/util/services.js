@@ -3,7 +3,6 @@ const querystring = require('querystring');
 
 module.exports = {
     fetch: {async post(serviceName, path, query, body) {
-            if (userId) query['internalUserId'] = userId;
             let url = `http://${
                 process.env[serviceName.toUpperCase() + '_SERVICE_SERVICE_HOST']
                 }/api/v1/${path}`;

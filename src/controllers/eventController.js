@@ -12,7 +12,9 @@ module.exports = {
         try {
             // Create and get locationId from MapService
             const newLocation = await MapService.location.create(location);
-            instance.locationId = newLocation.id;
+            console.log(newLocation);
+            instance.locationID = newLocation.id;
+            console.log(instance.locationID.concat("\tkajsødlkfjklasjdfkløjaøskldfajsdølfkalksdfkasdjfølk"));
             if(!newLocation) {
                 throw new Error('Could not store location...');
             }
@@ -57,11 +59,13 @@ module.exports = {
         }
     },
 
-    async retriveOne(id) {
+    async retrieveOne(id) {
         const instance = (await db.event.findByPk(id, {
             include: [{model: db.image}]
         })).dataValues;
+
         const location = await MapService.location.retrieveOne(instance.locationId);
+
         delete instance['locationId'];
         instance.location = location;
         return instance;
