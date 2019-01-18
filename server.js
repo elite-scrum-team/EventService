@@ -1,4 +1,3 @@
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -23,8 +22,8 @@ app.get('/metrics', async (req, res) => {
 app.use(morgan('dev'));
 
 // routers
-app.use('/api/v1/image', require('./routers/image'));
-app.use('/api/v1/event', require('./routers/event'));
+app.use('/api/v1/event', require('./src/router/eventRouter'));
+app.use('/api/v1/image', require('./src/router/imageRouter'));
 
 app.get('/', async (req, res) => {
     await res.send({

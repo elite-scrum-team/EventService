@@ -1,27 +1,21 @@
-const ImageController = require('../controllers/ImageController')
-const WarningController = require('../controllers/WarningController');
+const ImageController = require('../controllers/imageController');
+const EventController = require('../controllers/eventController');
 
-const router = require('express').Router()
+const router = require('express').Router();
 
 router
     .route('/').post(async (req, res) => {
     console.log(req.body);
     // Check if user is allowed to add image
-    const warningId = req.body.warningId;
-    const fileURL = req.body.fileURL
-    console.log("WarningID: ", warningId);
-    console.log("FILEURL: ", req.body.fileURL)
+    const eventId = req.body.eventId;
+    const fileURL = req.body.fileURL;
+    console.log("WarningID: ", eventId);
+    console.log("FILEURL: ", req.body.fileURL);
 
     try {
-        let warning = await WarningController.retriveOne(warningId);
-        /*
-        if(warning.userId !== req.query.internalUserId) {
-            res.send('Not authorized', 403);
-            return;
-        }
-        */
+        let event = await EventController.retriveOne(eventId);
 
-        const result = await ImageController.create({warningId, fileURL}, req.query.internalUserId)
+        const result = await ImageController.create({eventId, fileURL});
         if(result) {
             await res.send(result)
         } else {
@@ -31,7 +25,7 @@ router
         console.error(err);
         res.send(err, 500);
     }
-})
+});
 
 
-module.exports = router
+module.exports = router;
