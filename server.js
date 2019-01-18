@@ -10,7 +10,7 @@ const app = express();
 const port = process.env.port || 4000;
 
 
-db.sequelize.sync({ force: true });
+db.sequelize.sync({ alter: true });
 
 // middleware
 app.use(bodyParser.json());
