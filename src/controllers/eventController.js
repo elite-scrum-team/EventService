@@ -14,7 +14,6 @@ module.exports = {
             const newLocation = await MapService.location.create(location);
             console.log(newLocation);
             instance.locationID = newLocation.id;
-            console.log(instance.locationID.concat("\tkajsødlkfjklasjdfkløjaøskldfajsdølfkalksdfkasdjfølk"));
             if(!newLocation) {
                 throw new Error('Could not store location...');
             }
@@ -64,7 +63,7 @@ module.exports = {
             include: [{model: db.image}]
         })).dataValues;
 
-        const location = await MapService.location.retrieveOne(instance.locationId);
+        const location = await MapService.location.retrieveOne(instance.locationID);
 
         delete instance['locationId'];
         instance.location = location;
