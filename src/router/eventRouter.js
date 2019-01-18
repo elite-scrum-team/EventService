@@ -5,13 +5,13 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     const result = await EventController.retrieve(req.query);
-    await res.send(result)
+    await res.json(result)
 });
 
 router.get('/:id', async (req, res) => {
     const r = await EventController.retriveOne(req.params.id);
     if (r) {
-        await res.send(r);
+        await res.json(r);
     } else {
         await res.send({ error: 'Warning with that id does not exist' }, 404);
     }

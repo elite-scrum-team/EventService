@@ -2,10 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const client = require('prom-client');
+const db = require('./src/models');
+
 require('dotenv').config();
 
 const app = express();
 const port = process.env.port || 4000;
+
+
+db.sequelize.sync({ force: true });
 
 // middleware
 app.use(bodyParser.json());

@@ -1,5 +1,5 @@
 const db = require('../models');
-const MapService = require('../services/MapService');
+const MapService = require('../services/mapService');
 
 const flatten = require('../util/flatten');
 
