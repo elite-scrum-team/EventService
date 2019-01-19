@@ -12,7 +12,6 @@ module.exports = {
         try {
             // Create and get locationID from MapService
             const newLocation = await MapService.location.create(location);
-            console.log(newLocation);
             instance.locationID = newLocation.id;
             if(!newLocation) {
                 throw new Error('Could not store location...');
@@ -31,7 +30,7 @@ module.exports = {
 
     async retrieve({ offset, limit }) {
         try {
-            const r = db.event.findAll({
+            const r =  await db.event.findAll({
                 offset, limit,
                 include: [{model: db.image}]
             });
@@ -87,6 +86,37 @@ module.exports = {
                 .sort((a, b) => new Date(b.data.createdAt) - new Date(a.data.createdAt));
 
         return sortedFlatContent
+    },
+
+    async retrieveWithMunicipality(municipalityId){
+        try{
+            const locationsObject = {};
+            const events = await db.event.findAll({
+            include: [{model: db.image}]
+            });
+
+            const ids = await events.map(it => it.dataValues.locationID).filter(it => it);
+
+            const locations = await MapService.location.retrieve({id__in: ids});
+
+            const result = await locations.filter(it => it.municipalityId === municipalityId.id);
+
+            await result.map(it => locationsObject[it.id] = it);
+
+            return events.filter(event =>  {
+                const id = event.dataValues.locationID;
+                if(locationsObject[id]){
+                     const e = event.dataValues;
+                     e.location = locationsObject[id];
+                    delete e['locationID'];
+                    return e;
+                }
+            })
+
+        }catch (e) {
+            console.error(e);
+            throw e;
+        }
     },
 
     async update(id, values) {
