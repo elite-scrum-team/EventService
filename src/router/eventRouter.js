@@ -26,7 +26,6 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-
 router.post('/', async (req, res) => {
     const instanceOrError = await EventController.create(req.body);
     await res.send(instanceOrError);

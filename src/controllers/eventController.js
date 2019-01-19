@@ -10,7 +10,7 @@ module.exports = {
         };
 
         try {
-            // Create and get locationId from MapService
+            // Create and get locationID from MapService
             const newLocation = await MapService.location.create(location);
             console.log(newLocation);
             instance.locationID = newLocation.id;
@@ -36,7 +36,7 @@ module.exports = {
                 include: [{model: db.image}]
             });
 
-            const ids = await r.map(it => it.dataValues.locationId).filter(it => it);
+            const ids = await r.map(it => it.dataValues.locationID).filter(it => it);
             const locations = await MapService.location.retrieve({id__in: ids});
 
             const locationsObject = {};
@@ -44,8 +44,8 @@ module.exports = {
 
             return r.map(it => {
                 const eventFromDatabase = it.dataValues;
-                const location = locationsObject[eventFromDatabase.locationId];
-                delete eventFromDatabase['locationId'];
+                const location = locationsObject[eventFromDatabase.locationID];
+                delete eventFromDatabase['locationID'];
                 if (location)
                     eventFromDatabase.location = location;
                 else
@@ -65,7 +65,7 @@ module.exports = {
 
         const location = await MapService.location.retrieveOne(instance.locationID);
 
-        delete instance['locationId'];
+        delete instance['locationID'];
         instance.location = location;
         return instance;
 
