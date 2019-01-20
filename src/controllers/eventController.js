@@ -4,9 +4,9 @@ const MapService = require('../services/mapService');
 const flatten = require('../util/flatten');
 
 module.exports = {
-    async create({ title, fromTime, toTime ,link ,description, location}) {
+    async create({ title, fromTime, toTime ,link ,description, location, userId}) {
         const instance = {
-            title, fromTime, toTime, link , description
+            title, fromTime, toTime, link , description, userId
         };
 
         try {
@@ -93,6 +93,7 @@ module.exports = {
             const locationsObject = {};
             const events = await db.event.findAll({
             include: [{model: db.image}]
+
             });
 
             const ids = await events.map(it => it.dataValues.locationID).filter(it => it);
@@ -112,7 +113,6 @@ module.exports = {
                     return e;
                 }
             })
-
         }catch (e) {
             console.error(e);
             throw e;

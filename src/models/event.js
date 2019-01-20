@@ -24,6 +24,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         locationID: {
             type: DataTypes.UUID
+        },
+        userId: {
+            type: DataTypes.UUID
         }
     });
     Event.associate = models => {
