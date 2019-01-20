@@ -58,9 +58,15 @@ module.exports = {
     },
 
     async retrieveOne(id) {
-        const instance = (await db.event.findByPk(id, {
+        let instance = (await db.event.findByPk(id, {
             include: [{model: db.image}]
-        })).dataValues;
+        }));
+
+        if(!instance) {
+            return null;
+        }
+
+        instance = instance.dataValues;
 
         const location = await MapService.location.retrieveOne(instance.locationID);
 
@@ -69,7 +75,7 @@ module.exports = {
         return instance;
 
     },
-
+/*
     async retrieveContent(id) {
         const instance = await db.event.findByPk(id, {
             include: [{ all: true }]
@@ -87,7 +93,7 @@ module.exports = {
 
         return sortedFlatContent
     },
-
+*/
     async retrieveWithMunicipality(municipalityId){
         try{
             const locationsObject = {};

@@ -18,7 +18,7 @@ router.get('/:id', async (req, res) => {
 });
 
 router.get('/municipality/:id', async (req, res) =>{
-    const response = await EventController.retrieveWithMunicipality(req.params);
+    const response = await EventController.retrieveWithMunicipality(req.params.id);
     response ? res.json(response) : res.send({error : 'could not retrieve events from location'});
 });
 
