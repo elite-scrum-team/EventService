@@ -99,14 +99,13 @@ module.exports = {
             const locationsObject = {};
             const events = await db.event.findAll({
             include: [{model: db.image}]
-
             });
 
             const ids = await events.map(it => it.dataValues.locationID).filter(it => it);
 
             const locations = await MapService.location.retrieve({id__in: ids});
 
-            const result = await locations.filter(it => it.municipalityId === municipalityId.id);
+            const result = await locations.filter(it => it.municipalityId === municipalityId);
 
             await result.map(it => locationsObject[it.id] = it);
 

@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
     Event.associate = models => {
-        Event.hasMany(models.image)
+        Event.hasMany(models.image);
     };
     return Event;
 };
