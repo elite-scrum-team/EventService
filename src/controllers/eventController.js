@@ -30,9 +30,13 @@ module.exports = {
 
     async retrieve({ offset, limit }) {
         try {
+            limit = limit || 20;
+            offset = offset || 0;
+
             const r =  await db.event.findAll({
                 offset, limit,
-                include: [{model: db.image}]
+                include: [{model: db.image}],
+                order: [['createdAt', 'DESC']],
             });
 
             const ids = await r.map(it => it.dataValues.locationID).filter(it => it);
