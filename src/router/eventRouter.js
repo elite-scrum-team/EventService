@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     const result = await EventController.retrieve(req.query);
-    await res.json(result)
+    await res.json(result);
 });
 
 router.get('/:id', async (req, res) => {
