@@ -1,7 +1,7 @@
 const db = require('../models');
 const MapService = require('../services/mapService');
 
-const flatten = require('../util/flatten');
+//const flatten = require('../util/flatten');
 
 module.exports = {
     async create({ title, fromTime, toTime ,link ,description, location, userId}) {
