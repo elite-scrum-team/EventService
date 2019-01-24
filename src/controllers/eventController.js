@@ -35,7 +35,7 @@ module.exports = {
                 offset, limit,
                 include: [{model: db.image}],
                 order: [['createdAt', 'DESC']],
-            });
+            }).filter( e => Date.now() <= new Date(e.toTime));
 
             const ids = await r.map(it => it.dataValues.locationID).filter(it => it);
             const locations = await MapService.location.retrieve({id__in: ids});
