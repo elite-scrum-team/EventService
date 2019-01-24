@@ -1,8 +1,6 @@
 const db = require('../models');
 const MapService = require('../services/mapService');
 
-//const flatten = require('../util/flatten');
-
 module.exports = {
     async create({ title, fromTime, toTime ,link ,description, location, userId}) {
         const instance = {
@@ -129,6 +127,8 @@ module.exports = {
     },
 
     async update(id, values) {
+        Object.keys(values).forEach((key) => (values[key] == null) && delete values[key]);
+
         try {
             const event = await db.event.findByPk(id);
             return await event.update(values)
