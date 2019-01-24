@@ -130,6 +130,12 @@ module.exports = {
         Object.keys(values).forEach((key) => (values[key] == null) && delete values[key]);
 
         try {
+            const newLocation = await MapService.location.create(values.location);
+            values.locationID = newLocation.id;
+            if(!newLocation) {
+                throw new Error('Could not store location...');
+            }
+
             const event = await db.event.findByPk(id);
             return await event.update(values)
         } catch (err) {
