@@ -57,7 +57,7 @@ module.exports = {
                 include: [{model: db.image}],
                 order: [['fromTime', 'DESC']],
             });
-            r = r.filter( e => Date.now() >= new Date(e.toTime));
+            r = r.filter( e => Date.now() <= new Date(e.toTime));
 
             if(!r) return null;
 
