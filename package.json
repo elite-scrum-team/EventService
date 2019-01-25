@@ -4,7 +4,7 @@
   "description": "service for events",
   "main": "server.js",
   "scripts": {
-    "test": "mocha --exit src/test/*.test.js",
+    "test": "nyc --reporter=html mocha src/test/*.test.js",
     "start": "node server.js"
   },
   "repository": {
@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "jest": "^23.6.0",
+    "nyc": "^13.1.0",
     "sequelize-cli": "^5.4.0"
   }
 }
