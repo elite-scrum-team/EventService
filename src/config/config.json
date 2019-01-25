@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "EventService",
-    "password": "`[um5nmD^76r-=wQ)RJTy22$3PIlV-Re503d~4XmR[",
-    "database": "EventService",
-    "host": "35.228.44.201",
+    "username": "anders",
+    "password": "WCJEzJed4bUhCp9",
+    "database": "Event",
+    "host": "35.228.83.127",
     "dialect": "mysql"
   },
   "test": {

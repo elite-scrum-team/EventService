@@ -14,9 +14,8 @@ module.exports = {
             if(!newLocation) {
                 throw new Error('Could not store location...');
             }
-            const res = await db.sequelize.transaction(async t => {
-                return await db.event.create(instance);
-            });
+
+            const res =  await db.event.create(instance);
 
             await res.reload({include: [{all: true}]});
             return res.dataValues;
