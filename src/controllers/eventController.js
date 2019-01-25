@@ -52,12 +52,12 @@ module.exports = {
             limit = limit || 20;
             offset = offset || 0;
 
-            const r =  await db.event.findAll({
+            let  r =  await db.event.findAll({
                 offset, limit,
                 include: [{model: db.image}],
-                order: [['createdAt', 'DESC']],
+                order: [['fromTime', 'DESC']],
             });
-            r.filter( e => Date.now() <= new Date(e.toTime));
+            r = r.filter( e => Date.now() >= new Date(e.toTime));
 
             if(!r) return null;
 

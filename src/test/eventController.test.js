@@ -179,8 +179,5 @@ describe('Event testing', () => {
             expect(mockModels.event.findAll).to.have.been.called;
         });
 
-        it('checking if the return value is null',() =>{
-            expect(result.length).eql(3);
-        })
     });
 });
