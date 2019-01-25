@@ -1,6 +1,16 @@
 const db = require('../models');
+/**
+ Image Controller
+ @module controllers/imageController
+ */
 
 module.exports = {
+    /**
+     *  @function
+     *  @param {string} eventId - What event id the image belongs to
+     *  @oaram {string} fileURL - the url of the image
+     *  @return object of the new event
+     */
     async create({eventId, fileURL}) {
         if(!fileURL) {
             return;
@@ -19,6 +29,13 @@ module.exports = {
             throw err
         }
     },
+
+    /**
+     *  @function
+     *  @param {string} eventId - What event id the image belongs to
+     *  @oaram {string} fileURL - the url of the image
+     *  @return returns the object of the image creation
+     */
     async update({eventId, fileURL}){
         if(!fileURL) return;
         let conf;

@@ -1,8 +1,22 @@
 const fetch = require('node-fetch');
 const querystring = require('querystring');
 
+/**
+ Service
+ @module util/service
+ */
+
 module.exports = {
-    fetch: {async post(serviceName, path, query, body) {
+    fetch: {
+        /**
+         *  @function
+         *  @param {string} serviceName - Name of the service
+         *  @param {string} path - path of the fetch
+         *  @param {string} query - query of the fetch
+         *  @param {Object} body - body of the fetch
+         *  @return A promise of a fetch
+         */
+        async post(serviceName, path, query, body) {
             let url = `http://${
                 process.env[serviceName.toUpperCase() + '_SERVICE_SERVICE_HOST']
                 }/api/v1/${path}`;
@@ -18,6 +32,13 @@ module.exports = {
                 body: JSON.stringify(body),
             });
         },
+        /**
+         *  @function
+         *  @param {string} serviceName - Name of the service
+         *  @param {string} path - path of the fetch
+         *  @param {string} query - query of the fetch
+         *  @return A promise of a fetch
+         */
         async get(serviceName, path, query){
             let url = `http://${
                 process.env[serviceName.toUpperCase() + '_SERVICE_SERVICE_HOST']

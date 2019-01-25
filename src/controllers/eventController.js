@@ -1,7 +1,23 @@
 const db = require('../models');
 const MapService = require('../services/mapService');
+/**
+ Event Controller
+ @module controllers/eventController
+ */
 
 module.exports = {
+    /**
+     *  @function
+     *  @param {string} title - Title of the new event
+     *  @oaram {Date} fromTime - Start time of the event
+     *  @param {Date} toTime - End time of the event
+     *  @param {string} link - Link to the event
+     *  @param {string} description - A description of the event
+     *  @param {Object}location - Latitude longitude of the event
+     *  @param {string} userId - Who is the creator of the event
+     *
+     *  @return object of the new event
+     */
     async create({ title, fromTime, toTime ,link ,description, location, userId}) {
         const instance = {
             title, fromTime, toTime, link , description, userId
@@ -24,6 +40,12 @@ module.exports = {
             throw err;
         }
     },
+    /**
+     *  @function
+     *  @param {number} offset - Offset of the array
+     *  @param {number} limit - Amount of returned events
+     *  @return Array of events
+     */
 
     async retrieve({ offset, limit }) {
         try {
@@ -61,6 +83,11 @@ module.exports = {
             throw err
         }
     },
+    /**
+     *  @function
+     *  @param {string} id - EventId
+     *  @return An event
+     */
 
     async retrieveOne(id) {
         let instance = (await db.event.findByPk(id, {
@@ -99,6 +126,12 @@ module.exports = {
         return sortedFlatContent
     },
 */
+
+    /**
+     *  @function
+     *  @param {string} municipalityId - The municipality id
+     *  @return An array of events
+     */
     async retrieveWithMunicipality(municipalityId){
         try{
             const locationsObject = {};
@@ -131,6 +164,13 @@ module.exports = {
             throw e;
         }
     },
+
+    /**
+     *  @function
+     *  @param {string} id - The event id
+     *  @param {Object} values - The new values of the event
+     *  @return An array of events
+     */
 
     async update(id, values) {
         Object.keys(values).forEach((key) => (values[key] == null) && delete values[key]);
