@@ -8,6 +8,7 @@ module.exports = {
                 }/api/v1/${path}`;
             const qs = querystring.stringify(query);
             if (qs) url += `?${qs}`;
+            if(!path)return null;
             return await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -25,7 +26,7 @@ module.exports = {
             const qs = querystring.stringify(query);
 
             if (qs) url += `?${qs}`;
-
+            if(!path)return null;
             return await fetch(url, {
                 method: 'GET',
                 headers: {

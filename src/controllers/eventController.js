@@ -34,9 +34,13 @@ module.exports = {
                 offset, limit,
                 include: [{model: db.image}],
                 order: [['createdAt', 'DESC']],
-            }).filter( e => Date.now() <= new Date(e.toTime));
+            });
+            r.filter( e => Date.now() <= new Date(e.toTime));
 
-            const ids = await r.map(it => it.dataValues.locationID).filter(it => it);
+            if(!r) return null;
+
+            const ids = await r.map(it => it.dataValues.locationID);
+            ids.filter(it => it);
             const locations = await MapService.location.retrieve({id__in: ids});
 
             const locationsObject = {};
@@ -102,6 +106,8 @@ module.exports = {
             include: [{model: db.image}]
             });
 
+            if(!events) return null;
+
             const ids = await events.map(it => it.dataValues.locationID).filter(it => it);
 
             const locations = await MapService.location.retrieve({id__in: ids});
@@ -109,6 +115,7 @@ module.exports = {
             const result = await locations.filter(it => it.municipalityId === municipalityId);
 
             await result.map(it => locationsObject[it.id] = it);
+
 
             return events.filter(event =>  {
                 const id = event.dataValues.locationID;
